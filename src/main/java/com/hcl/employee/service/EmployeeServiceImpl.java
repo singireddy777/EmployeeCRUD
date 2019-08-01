@@ -1,6 +1,7 @@
 package com.hcl.employee.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,17 +25,16 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 	}
 
-	public String fetchEmployeebyId(long empId) {
-		 if (empRepo.findById(empId).get() !=null) { 
-			 return "employee details are....";
-		 }else { 
-			 return "employee details are not available....";
-		 }
+	public Employee fetchEmployeebyId(long empId) {
+		  return empRepo.findByEmpId(empId);
+				 
+			
 	}
 
 	/*public Employee fetchEmployeebyId(long empId) {
 		return empRepo.findById(empId).get();
 	}*/
+	
 	public String deleteEmpById(long empId) {
 		empRepo.deleteById(empId);
 		return "employee deleted";

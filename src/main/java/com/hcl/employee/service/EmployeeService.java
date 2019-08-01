@@ -10,8 +10,8 @@ import com.hcl.employee.entity.Employee;
 @Service
 public interface EmployeeService {
 
-	public  String createEmployee(Employee employee);
-	public String fetchEmployeebyId(long empId);
+	public String createEmployee(Employee employee);
+	public Employee fetchEmployeebyId(long empId);
 	public String deleteEmpById(long empId);
 	public String updateEmpById(@PathVariable long empId);
 	public List<Employee> getEmployeeList();

@@ -8,5 +8,5 @@ import com.hcl.employee.entity.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
- 
+	public Employee findByEmpId(long empId);
 }

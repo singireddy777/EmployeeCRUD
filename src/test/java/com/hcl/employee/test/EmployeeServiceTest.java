@@ -2,7 +2,8 @@ package com.hcl.employee.test;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,43 +19,113 @@ import com.hcl.employee.service.EmployeeServiceImpl;
 @RunWith(MockitoJUnitRunner.class)
 public class EmployeeServiceTest {
 
-	
 	@Mock
 	EmployeeRepository empRepository;
-	
+
 	@InjectMocks
 	EmployeeServiceImpl empServiceImpl;
-	@Test
-	public void createEmplyeeTest() {
-		
+
+	/*@Before
+	public Employee getEmployee() {
 		Employee employee = new Employee();
-		
+
 		employee.setEmpId(1L);
 		employee.setDesignation("Support Engineer");
 		employee.setEmpAddress("BTM");
 		employee.setEmpEmail("abc@gmail");
 		employee.setEmpMobileNo(974322L);
 		employee.setEmpName("venkat");
-		Mockito.when(empRepository.save(Mockito.any(Employee.class))).thenReturn(employee);
+		return employee;
+	}*/
+
+	@Test
+	public void createEmplyeeTest() {
+
+		Employee employee = new Employee();
+
+		employee.setEmpId(1L);
+	employee.setDesignation("Support Engineer");
+		employee.setEmpAddress("BTM");
+		employee.setEmpEmail("abc@gmail");
+		employee.setEmpMobileNo(974322L);
+	employee.setEmpName("venkat");
+		Mockito.when(empRepository.save(Mockito.any())).thenReturn(employee);
 		String result = empServiceImpl.createEmployee(employee);
 		assertEquals("employee details are saved successfully.....", result);
 	}
+
 	@Test
-	public void fetchEmpDetailsByIdTest() {
-		
-		Employee employee=new Employee();
-		employee.setEmpId(1);
-		employee.setEmpMobileNo(90308);
-		employee.setEmpName("charan");
-		employee.setEmpAddress("chennai");
+	public void fetchEmployeebyIdTest() {
+
+		Employee employee = new Employee();
+		employee.setEmpId(1L);
+		employee.setEmpMobileNo(973799);
+		employee.setEmpName("venky");
+		employee.setEmpAddress("btm");
 		employee.setEmpEmail("abc@gmail");
-		employee.setDesignation("s/w engineer");
+		employee.setDesignation("developer");
+
+		Mockito.when(empRepository.findByEmpId((long) Mockito.anyLong())).thenReturn(employee);
+		// Mockito.when(empRepository.findByEmpId(Mockito.anyInt())).thenReturn(employee);
+
+		Employee actualValue = empServiceImpl.fetchEmployeebyId(1L);
+
+		assertEquals(employee, actualValue);
+
+	}
+
+	@Test
+	public void deleteEmpByIdTest() {
+		Employee employee = new Employee();
+		employee.setDesignation("tester");
+		employee.setEmpId(2L);
+		employee.setEmpAddress("kdp");
+		employee.setEmpEmail("pqr@gmail");
+		employee.setEmpMobileNo(799612L);
+		employee.setEmpName("papa");
 		
-		Mockito.when(empRepository.findById((long) Mockito.anyInt())).thenReturn(employee).get();
+		Mockito.when(empRepository.findByEmpId(Mockito.anyInt())).thenReturn(employee);
+
+		String actualValue = empServiceImpl.deleteEmpById(Mockito.anyLong());
+
+		assertEquals("employee deleted", actualValue);
+
+	}
+	@Test
+	public void updateEmpByIdTest() {
+		Employee employee =  new Employee();
 		
-		String actualValue=empServiceImpl.fetchEmployeebyId(1L);
 		
-		assertEquals(employee, actualValue);		
+	employee.setEmpId(1L);	
+	employee.setDesignation("developoer");
+	employee.setEmpAddress("btm");
+	employee.setEmpEmail("abc@gmail");
+     employee.setEmpMobileNo(973799L);
+     employee.setEmpName("venky");
+
+    Mockito.when(empRepository.findByEmpId(Mockito.anyLong())).thenReturn(employee);
+    Mockito.when(empRepository.save(employee)).thenReturn(employee);
+    String result = empServiceImpl.updateEmpById(Mockito.anyLong());
+    assertEquals("employee updated Successfully.....", result);
+	}
+
+	@Test
+	public void getEmployeeListTest() {
+		
+		List<Employee> empList = new ArrayList<>();
+		
+		Employee employee = new Employee();
+		
+		employee.setDesignation("dev");
+		employee.setEmpAddress("btm");
+		employee.setEmpEmail("xyz@gmail");
+		employee.setEmpId(2L);
+		employee.setEmpMobileNo(973923L);
+		employee.setEmpName("vensee");
+		
+		empList.add(employee);
+		
 		
 	}
 }
+
