@@ -51,13 +51,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return "employee updated Successfully.....";
 		
 	}else 
-		
-		
 		return "unable to update employee.....";
 	}
-
-
-
 	public List<Employee> getEmployeeList() {
 return empRepo.findAll();
 	}

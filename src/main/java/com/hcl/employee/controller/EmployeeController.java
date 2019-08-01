@@ -43,7 +43,7 @@ public class EmployeeController {
 		return new ResponseEntity<String>(empService.updateEmpById(empId), HttpStatus.OK);
 	}
 	
-	@GetMapping("/getAllEmployees/{empId}")
+	@GetMapping("/getAllEmployees")
 	
 	public ResponseEntity<List<Employee>> getAllEmployees(){
 		

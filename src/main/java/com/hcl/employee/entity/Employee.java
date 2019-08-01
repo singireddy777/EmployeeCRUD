@@ -70,6 +70,4 @@ public class Employee {
 		return "Employee [empId=" + empId + ", empName=" + empName + ", empEmail=" + empEmail + ", empMobileNo="
 				+ empMobileNo + ", empAddress=" + empAddress + ", Designation=" + Designation + "]";
 	}
-	
-	
 }

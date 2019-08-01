@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.el.stream.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -77,7 +78,7 @@ public class EmployeeServiceTest {
 	@Test
 	public void deleteEmpByIdTest() {
 		Employee employee = new Employee();
-		employee.setDesignation("tester");
+		employee.setDesignation("supprt Engg");
 		employee.setEmpId(2L);
 		employee.setEmpAddress("kdp");
 		employee.setEmpEmail("pqr@gmail");
@@ -103,7 +104,7 @@ public class EmployeeServiceTest {
      employee.setEmpMobileNo(973799L);
      employee.setEmpName("venky");
 
-    Mockito.when(empRepository.findByEmpId(Mockito.anyLong())).thenReturn(employee);
+    Mockito.when(empRepository.findById(Mockito.anyLong())).thenReturn(java.util.Optional.of(employee));
     Mockito.when(empRepository.save(employee)).thenReturn(employee);
     String result = empServiceImpl.updateEmpById(Mockito.anyLong());
     assertEquals("employee updated Successfully.....", result);
@@ -125,7 +126,20 @@ public class EmployeeServiceTest {
 		
 		empList.add(employee);
 		
+		Employee employee1 = new Employee();
 		
+		employee1.setDesignation("test");
+		employee1.setEmpAddress("ecity");
+		employee1.setEmpEmail("pqr@gmail");
+		employee1.setEmpId(2L);
+		employee1.setEmpMobileNo(973923L);
+		employee1.setEmpName("venky");
+		empList.add(employee1);
+		
+		Mockito.when(empRepository.findAll()).thenReturn(empList);
+
+		List<Employee> empList1 = empServiceImpl.getEmployeeList();
+		assertEquals(2, empList1.size());
 	}
 }
 
